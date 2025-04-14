@@ -6,9 +6,10 @@
     "n8n-community-node-package",
     "elasticsearch",
     "vector",
-    "embeddings"
+    "embeddings",
+    "semantic-search"
   ],
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "homepage": "https://www.alejandrosl.com",
   "author": {
     "name": "Alejandro Sanchez",
@@ -42,7 +43,8 @@
       "dist/credentials/ElasticsearchApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ElasticsearchVector/ElasticsearchVector.node.js"
+      "dist/nodes/ElasticsearchVector/ElasticsearchVector.node.js",
+      "dist/nodes/ElasticsearchVector/VectorStoreElasticsearch.node.js"
     ]
   },
   "devDependencies": {
@@ -57,6 +59,7 @@
     "n8n-workflow": "*"
   },
   "dependencies": {
+    "@langchain/core": "^0.2.1",
     "@types/request-promise-native": "^1.0.21",
     "request-promise-native": "^1.0.9"
   }

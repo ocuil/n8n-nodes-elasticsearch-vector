@@ -8,15 +8,15 @@ import {
 
 export class ElasticsearchVector implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Elasticsearch Vector',
+		displayName: 'Elasticsearch Vector Store',
 		name: 'elasticsearchVector',
 		icon: 'file:elasticsearch.svg',
-		group: ['transform'],
+		group: ['transform', 'input'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Work with Elasticsearch semantic_text fields and semantic search',
+		description: 'Work with Elasticsearch semantic_text fields for vector search',
 		defaults: {
-			name: 'Elasticsearch Vector',
+			name: 'Elasticsearch Vector Store',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
@@ -31,6 +31,21 @@ export class ElasticsearchVector implements INodeType {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
+			},
+		},
+		codex: {
+			categories: ['AI', 'Data & Storage'],
+			subcategories: {
+				AI: ['Vector Databases'],
+				'Data & Storage': ['Databases', 'Search']
+			},
+			alias: ['vector store', 'semantic search', 'elasticsearch'],
+			resources: {
+				primaryDocumentation: [
+					{
+						url: 'https://github.com/ocuil/n8n-nodes-elasticsearch-vector',
+					},
+				],
 			},
 		},
 		properties: [
