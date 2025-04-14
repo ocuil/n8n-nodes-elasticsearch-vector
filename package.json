@@ -1,0 +1,63 @@
+{
+  "name": "n8n-nodes-elasticsearch-vector",
+  "version": "0.1.0",
+  "description": "Elasticsearch Vector Node for n8n to work with vector embeddings",
+  "keywords": [
+    "n8n-community-node-package",
+    "elasticsearch",
+    "vector",
+    "embeddings"
+  ],
+  "license": "Apache 2.0",
+  "homepage": "https://www.alejandrosl.com",
+  "author": {
+    "name": "Alejandro Sanchez",
+    "email": "alejandrosl@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ocuil/n8n-nodes-elasticsearch-vector.git"
+  },
+  "engines": {
+    "node": ">=18.10",
+    "pnpm": ">=9.1"
+  },
+  "packageManager": "pnpm@9.1.4",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier nodes credentials --write",
+    "lint": "eslint nodes credentials package.json",
+    "lintfix": "eslint nodes credentials package.json --fix",
+    "prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes credentials package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/ElasticsearchApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/ElasticsearchVector/ElasticsearchVector.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^7.15.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.1",
+    "gulp": "^4.0.2",
+    "prettier": "^3.3.2",
+    "typescript": "^5.5.3"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "@types/request-promise-native": "^1.0.21",
+    "request-promise-native": "^1.0.9"
+  }
+}
