@@ -2,102 +2,65 @@
 
 # n8n-nodes-elasticsearch-vector
 
-This is an n8n community node. It lets you use Elasticsearch in your n8n workflows.
+Este es un nodo de comunidad para n8n que permite realizar búsquedas semánticas en Elasticsearch usando el campo `semantic_text`.
 
-Elasticsearch is a distributed, RESTful search and analytics engine capable of handling structured and unstructured data. This node leverages Elasticsearch's `semantic_text` feature for semantic search and hybrid queries.
+- Permite búsquedas semánticas sobre un índice de Elasticsearch sin necesidad de definir o gestionar modelos de embeddings manualmente.
+- Diseñado para integrarse como Tool en el nodo "AI Agent (Tools Agent)" de n8n.
+- No implementa operaciones de gestión de índices ni CRUD de documentos.
 
-[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
+[n8n](https://n8n.io/) es una plataforma de automatización de flujos de trabajo con licencia [fair-code](https://docs.n8n.io/reference/license/).
 
-[Installation](#installation)  
-[Operations](#operations)  
-[Credentials](#credentials)  
-[Compatibility](#compatibility)  
-[Usage](#usage)  
-[Resources](#resources)  
-[Version history](#version-history)  
+[Instalación](#instalación)  
+[Operación soportada](#operación-soportada)  
+[Credenciales](#credenciales)  
+[Compatibilidad](#compatibilidad)  
+[Uso](#uso)  
+[Recursos](#recursos)  
+[Historial de versiones](#historial-de-versiones)  
 
-## Installation
+## Instalación
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+Sigue la [guía oficial de instalación de nodos de comunidad](https://docs.n8n.io/integrations/community-nodes/installation/).
 
-## Operations
+## Operación soportada
 
-This node supports the following operations:
+- **Búsqueda semántica**: realiza consultas semánticas sobre un índice de Elasticsearch usando el modelo `semantic_text` integrado en Elasticsearch 8.9+.
 
-### Index Management
-- Create an index with `semantic_text` mappings.
-- Delete an index.
+## Credenciales
 
-### Document Management
-- Create a document with `semantic_text` fields.
-- Get a document by ID.
-- Delete a document by ID.
+1. Asegúrate de tener una instancia de Elasticsearch (v8.9 o superior) con el modelo semantic_text habilitado.
+2. Obtén las credenciales necesarias (API Key, usuario y contraseña, etc).
+3. Configura las credenciales en n8n seleccionando "Elasticsearch API" en el nodo.
 
-### Search
-- Perform semantic searches using `semantic_text` fields.
-- Execute custom searches using user-defined query templates.
+## Compatibilidad
 
-## Credentials
+- Versión mínima de n8n: 0.200.0
+- Probado con Elasticsearch 8.9+
 
-To use this node, you need to authenticate with an Elasticsearch instance. Follow these steps:
+## Uso
 
-1. Ensure you have an Elasticsearch instance running (version 8.9 or higher).
-2. Obtain the necessary credentials (e.g., API Key, username, and password).
-3. Configure the credentials in n8n by selecting "Elasticsearch API" in the node's credentials section.
+### Como Tool en el AI Agent
 
-## Compatibility
+1. Añade el nodo "AI Agent (Tools Agent)" en tu flujo de n8n.
+2. En la sección Tool, selecciona "Elasticsearch Vector Store".
+3. Configura el índice y los parámetros de búsqueda.
+4. El agente podrá realizar búsquedas semánticas sobre tu índice de Elasticsearch usando el modelo `semantic_text`.
 
-- Minimum n8n version: 0.200.0
-- Tested with Elasticsearch version 8.9 and above.
+#### Ejemplo de configuración
 
-## Usage
+- **Elasticsearch Index**: nombre del índice donde tienes tus documentos vectorizados.
+- **Query**: texto de la consulta semántica.
+- **Top K**: número de resultados a devolver.
+- **Query Field**: campo sobre el que se realiza la búsqueda (por defecto `text`).
 
-### Example: Hybrid Search Query
+## Recursos
 
-This node allows you to perform hybrid searches combining semantic and lexical queries. For example:
+- [Documentación de nodos de comunidad n8n](https://docs.n8n.io/integrations/community-nodes/)
+- [Documentación de Elasticsearch semantic_text](https://www.elastic.co/guide/en/elasticsearch/reference/current/semantic-search.html)
 
-```json
-{
-  "retriever": {
-    "rrf": {
-      "retrievers": [
-        {
-          "standard": {
-            "query": {
-              "semantic": {
-                "field": "respuesta_semantic",
-                "query": "{query}"
-              }
-            }
-          }
-        },
-        {
-          "standard": {
-            "query": {
-              "match": {
-                "respuesta": {
-                  "query": "{query}"
-                }
-              }
-            }
-          }
-        }
-      ]
-    }
-  }
-}
-```
+## Historial de versiones
 
-Replace `{query}` with your search term.
-
-## Resources
-
-- [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
-- [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
-
-## Version history
-
-- **0.1.0**: Initial release with support for `semantic_text` fields, index management, document management, and search operations.
+- **0.1.0**: Primera versión. Búsqueda semántica como Tool para el AI Agent de n8n.
 
 ## Licencia
 
@@ -105,14 +68,13 @@ Apache License 2.0
 
 Copyright 2025 Alejandro Sánchez Losa (alejandrosl@gmail.com)
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Licenciado bajo la Apache License, Version 2.0 (la "Licencia");
+puedes no usar este archivo excepto en cumplimiento con la Licencia.
+Puedes obtener una copia de la Licencia en
 
     http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+A menos que lo requiera la ley aplicable o se acuerde por escrito, el software
+se distribuye "TAL CUAL", SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO,
+ni expresas ni implícitas. Consulta la Licencia para el lenguaje específico
+gobernando permisos y limitaciones bajo la Licencia.
