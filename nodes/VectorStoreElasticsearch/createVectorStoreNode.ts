@@ -9,7 +9,7 @@ export interface VectorStoreNodeArgs {
     icon: string;
     docsUrl: string;
     credentials: { name: string; required: boolean }[];
-    operationModes: string[];
+    operationModes: ['retrieve', 'retrieve-as-tool'];
   };
   sharedFields: INodeProperties[];
   retrieveFields: INodeProperties[];

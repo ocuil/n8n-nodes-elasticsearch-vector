@@ -23,13 +23,6 @@ const retrieveFields: INodeProperties[] = [
     default: 4,
     description: 'Number of similar documents to return',
   },
-  {
-    displayName: 'Query Field',
-    name: 'queryField',
-    type: 'string',
-    default: 'text',
-    description: 'Field in the document to perform semantic search on',
-  },
 ];
 
 export class VectorStoreElasticsearch extends createVectorStoreNode<any>({
@@ -70,14 +63,7 @@ export class VectorStoreElasticsearch extends createVectorStoreNode<any>({
       index,
       body: {
         size: k,
-        query: {
-          text_expansion: {
-            [queryField]: {
-              model_id: 'elastic/semantic-text',
-              model_text: query,
-            },
-          },
-        },
+        query: [query],
       },
     });
     // Formatea los resultados
