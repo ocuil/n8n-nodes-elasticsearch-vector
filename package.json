@@ -9,7 +9,7 @@
     "embeddings",
     "semantic-search"
   ],
-  "license": "Apache-2.0",
+  "license": "MIT",
   "homepage": "https://www.alejandrosl.com",
   "author": {
     "name": "Alejandro Sanchez",
@@ -43,24 +43,25 @@
       "dist/credentials/ElasticsearchApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ElasticsearchVector/ElasticsearchVector.node.js",
       "dist/nodes/ElasticsearchVector/VectorStoreElasticsearch.node.js"
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^7.15.0",
+    "@typescript-eslint/parser": "^8.30.0",
     "eslint": "^8.56.0",
-    "eslint-plugin-n8n-nodes-base": "^1.16.1",
+    "eslint-plugin-n8n-nodes-base": "^1.16.3",
     "gulp": "^4.0.2",
     "prettier": "^3.3.2",
     "typescript": "^5.5.3"
   },
   "peerDependencies": {
-    "n8n-workflow": "*"
+    "n8n-workflow": "^1.82.0"
   },
   "dependencies": {
-    "@langchain/core": "^0.2.1",
+    "@elastic/elasticsearch": "^8.17.1",
+    "@langchain/core": "^0.3.44",
     "@types/request-promise-native": "^1.0.21",
+    "n8n-core": "^1.14.1",
     "request-promise-native": "^1.0.9"
   }
 }
